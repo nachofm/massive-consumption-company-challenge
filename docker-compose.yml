@@ -1,0 +1,20 @@
+version: "3"
+services:
+  spring-walmart:
+    image: nachofmartinez/massive-consumption-company-challenge:latest
+    container_name: spring-massive-consumption-company-challenge
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongodb-docker-database
+    environment:
+      - SPRING_DATA_MONGODB_HOST=mongodb-docker-database
+      - SPRING_DATA_MONGODB_PORT=27017
+      - SPRING_DATA_MONGODB_DATABASE=massive-consumption-company
+      - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_DATA_MONGODB_CORE_MONGOTEMPLATE=DEBUG
+      - SERVER_ERROR_INCLUDE_MESSAGE=always
+  mongodb-docker-database:
+    image: mongo:latest
+    container_name: "mongodb-docker-database"
+    ports:
+      - 27017:27017
